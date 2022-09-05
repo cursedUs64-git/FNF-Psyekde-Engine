@@ -113,6 +113,7 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
+		var psyekdeEngineVersion:String = '0.1.5';
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -121,8 +122,12 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 66, 0, "Psyek'de Engine v" + psyekdeEngineVersion, 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
 
-		// NG.core.calls.event.logEvent('swag').send();
+		NG.core.calls.event.logEvent('swag').send(); // is this even needed? (answer(s) in issues)
 
 		changeItem();
 
@@ -147,6 +152,10 @@ class MainMenuState extends MusicBeatState
 			char.frames = Paths.getSparrowAtlas('characters/BOYFRIEND');
 			char.animation.addByPrefix('idleBOY', 'BF idle dance', 24, true);
 			char.animation.play('idleBOY');
+			char.scrollFactor.set();
+			char.flipX = true;
+			char.antialiasing = ClientPrefs.globalAntialiasing;
+			add(char);
 			
 	}
 	#if ACHIEVEMENTS_ALLOWED
