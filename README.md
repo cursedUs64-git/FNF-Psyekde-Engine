@@ -1,5 +1,5 @@
 # Friday Night Funkin' - Psyek'de Engine
-* Etterna features maybe... lol
+* just a engine with kade engine stuff (except etterna features)
 ## Installation:
 Follow a Friday Night Funkin' source code compilation tutorial, after this you will need to install LuaJIT.
 
@@ -13,6 +13,10 @@ You can do this with: `haxelib install linc_luajit` on a Command prompt/PowerShe
 
 ### Special Thanks
 * Keoiki - Note Splash Animations
+
+### Psyke'de Engine Credits -
+* cursedUs64-git - Main Coder
+* ZHyprox - Secondary Coder
 
 WARNING: This engine is still a WIP!
 _____________________________________
