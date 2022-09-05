@@ -28,10 +28,18 @@ class MainMenuState extends MusicBeatState
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
+	var char:FlxSprite;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
 	
-	var optionShit:Array<String> = ['story_mode', 'freeplay', #if ACHIEVEMENTS_ALLOWED 'awards', #end 'credits', #if !switch 'donate', #end 'options'];
+	var optionShit:Array<String> = [
+		'story_mode', 
+		'freeplay', 
+// 		#if ACHIEVEMENTS_ALLOWED 'awards', #end 
+		'credits', 
+// 		#if !switch 'donate', #end 
+		'options'
+		];
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
@@ -94,7 +102,6 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -134,7 +141,14 @@ class MainMenuState extends MusicBeatState
 
 		super.create();
 	}
-
+	switch(FlxG.random.int(1, 1)){
+		case 1:
+			char = new FlxSprite(406, 392).loadGraphic(Paths.image('characters/BOYFRIEND'));
+			char.frames = Paths.getSparrowAtlas('characters/BOYFRIEND');
+			char.animation.addByPrefix('idleBOY', 'BF idle dance', 24, true);
+			char.animation.play('idleBOY');
+			
+	}
 	#if ACHIEVEMENTS_ALLOWED
 	// Unlocks "Freaky on a Friday Night" achievement
 	function giveAchievement() {
@@ -239,7 +253,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			spr.screenCenter(X);
+			
 		});
 	}
 
