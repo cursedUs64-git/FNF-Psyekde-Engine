@@ -12,7 +12,8 @@ import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
-//import flixel.graphics.FlxGraphic;
+import flixel.addons.display.FlxBackdrop;
+import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup;
 import flixel.input.gamepad.FlxGamepad;
@@ -45,6 +46,9 @@ class TitleState extends MusicBeatState
 	var logoSpr:FlxSprite;
 
 	var curWacky:Array<String> = [];
+	
+	var bgScroll:FlxBackdrop;
+	var bg:FlxSprite;
 
 	var wackyImage:FlxSprite;
 
@@ -202,6 +206,8 @@ class TitleState extends MusicBeatState
 		// logoBl.color = FlxColor.BLACK;
 
 		swagShader = new ColorSwap();
+		gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
+		gfDance.visible = false;
 		if(!FlxG.save.data.psykaEasterEgg || !easterEggEnabled) {
 			gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
 			gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
@@ -215,6 +221,12 @@ class TitleState extends MusicBeatState
 			gfDance.animation.addByIndices('danceLeft', 'psykaDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 			gfDance.animation.addByIndices('danceRight', 'psykaDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		}
+		
+		bg = new FlxSprite().loadGraphic(Paths.image('titleMeni/leTitleBG'));
+		bg.setGraphicSize(Std.int(bg.width * 1.1));
+		bg.screenCenter();
+		
+		add(bg);
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
 		add(gfDance);
 		gfDance.shader = swagShader.shader;
@@ -231,13 +243,13 @@ class TitleState extends MusicBeatState
 		// titleText.screenCenter(X);
 		add(titleText);
 
-		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
+		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image(''));
 		logo.screenCenter();
 		logo.antialiasing = ClientPrefs.globalAntialiasing;
 		// add(logo);
 
-		// FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
-		// FlxTween.tween(logo, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
+		FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
+		FlxTween.tween(logo, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
 
 		credGroup = new FlxGroup();
 		add(credGroup);
@@ -245,6 +257,12 @@ class TitleState extends MusicBeatState
 
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		credGroup.add(blackScreen);
+		
+		bgScroll = new FlxBackdrop(Paths.image('titleMenu/titleSCROLL'), 0, 0, true, false); // change the titleSCROLL to any image you want to use
+		bgScroll.velocity.set(100, 0);
+		bgScroll.screenCenter();
+		bgScroll.setGraphicsSize(Std.int(bgScroll.width * 1.1));
+		credGroup.add(bgScroll);
 
 		credTextShit = new Alphabet(0, 0, "", true);
 		credTextShit.screenCenter();
