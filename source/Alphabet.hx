@@ -344,6 +344,9 @@ class Alphabet extends FlxSpriteGroup
 				x = FlxMath.lerp(x, (targetY * 20) + 90 + xAdd, lerpVal);
 			}
 		}
+		/*
+			WARNING: DELETE isMenuItem AT YOUR OWN RISK! IM NOT RESPONSIBLE FOR ERRORS WHILE YOU COMPILE THE GAME!
+		*/
 		if (isMenuItemCenter)
 		{
 			var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
