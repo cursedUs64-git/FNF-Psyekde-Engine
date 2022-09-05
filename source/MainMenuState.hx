@@ -32,14 +32,7 @@ class MainMenuState extends MusicBeatState
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
 	
-	var optionShit:Array<String> = [
-		'story_mode', 
-		'freeplay', 
-// 		#if ACHIEVEMENTS_ALLOWED 'awards', #end 
-		'credits', 
-// 		#if !switch 'donate', #end 
-		'options'
-		];
+	var optionShit:Array<String> = ['story_mode', 'freeplay', // #if ACHIEVEMENTS_ALLOWED 'awards', #end 'credits', // #if !switch 'donate', #end 'options'];
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
@@ -112,7 +105,6 @@ class MainMenuState extends MusicBeatState
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
-
 		var psyekdeEngineVersion:String = '0.1.5';
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
 		versionShit.scrollFactor.set();
@@ -127,7 +119,7 @@ class MainMenuState extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
-		NG.core.calls.event.logEvent('swag').send(); // is this even needed? (answer(s) in issues)
+// 		NG.core.calls.event.logEvent('swag').send(); // is this even needed? (answer(s) in issues)
 
 		changeItem();
 
@@ -146,7 +138,8 @@ class MainMenuState extends MusicBeatState
 
 		super.create();
 	}
-	switch(FlxG.random.int(1, 1)){
+	switch(FlxG.random.int(1, 1))
+	{
 		case 1:
 			char = new FlxSprite(406, 392).loadGraphic(Paths.image('characters/BOYFRIEND'));
 			char.frames = Paths.getSparrowAtlas('characters/BOYFRIEND');
@@ -156,7 +149,7 @@ class MainMenuState extends MusicBeatState
 			char.flipX = true;
 			char.antialiasing = ClientPrefs.globalAntialiasing;
 			add(char);
-			
+		default:
 	}
 	#if ACHIEVEMENTS_ALLOWED
 	// Unlocks "Freaky on a Friday Night" achievement
