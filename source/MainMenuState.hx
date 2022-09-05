@@ -105,16 +105,12 @@ class MainMenuState extends MusicBeatState
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
-		var psyekdeEngineVersion:String = '0.1.5';
+		
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 66, 0, "Psyek'de Engine v" + psyekdeEngineVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -135,22 +131,24 @@ class MainMenuState extends MusicBeatState
 			}
 		}
 		#end
+			
+		switch(FlxG.random.int(1, 1)){
+			case 1:
+				char = new FlxSprite(406, 392).loadGraphic(Paths.image('characters/BOYFRIEND'));
+				char.frames = Paths.getSparrowAtlas('characters/BOYFRIEND');
+				char.animation.addByPrefix('idleBOY', 'BF idle dance', 24, true);
+				char.animation.play('idleBOY');
+				char.scrollFactor.set();
+				char.flipX = true;
+				char.antialiasing = ClientPrefs.globalAntialiasing;
+				add(char);
+		
+		}
 
 		super.create();
 	}
-	switch(FlxG.random.int(1, 1))
-	{
-		case 1:
-			char = new FlxSprite(406, 392).loadGraphic(Paths.image('characters/BOYFRIEND'));
-			char.frames = Paths.getSparrowAtlas('characters/BOYFRIEND');
-			char.animation.addByPrefix('idleBOY', 'BF idle dance', 24, true);
-			char.animation.play('idleBOY');
-			char.scrollFactor.set();
-			char.flipX = true;
-			char.antialiasing = ClientPrefs.globalAntialiasing;
-			add(char);
-		default:
-	}
+
+	
 	#if ACHIEVEMENTS_ALLOWED
 	// Unlocks "Freaky on a Friday Night" achievement
 	function giveAchievement() {
