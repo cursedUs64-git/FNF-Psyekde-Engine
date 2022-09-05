@@ -261,7 +261,7 @@ class TitleState extends MusicBeatState
 		bgScroll = new FlxBackdrop(Paths.image('titleMenu/titleSCROLL'), 0, 0, true, false); // change the titleSCROLL to any image you want to use
 		bgScroll.velocity.set(100, 0);
 		bgScroll.screenCenter();
-		bgScroll.setGraphicsSize(Std.int(bgScroll.width * 1.1));
+		bgScroll.setGraphicSize(Std.int(bgScroll.width * 1.1));
 		credGroup.add(bgScroll);
 
 		credTextShit = new Alphabet(0, 0, "", true);
