@@ -47,8 +47,7 @@ class TitleState extends MusicBeatState
 
 	var curWacky:Array<String> = [];
 	
-	var bgScroll:FlxBackdrop;
-	var bg:FlxSprite;
+	
 
 	var wackyImage:FlxSprite;
 
@@ -221,11 +220,6 @@ class TitleState extends MusicBeatState
 			gfDance.animation.addByIndices('danceRight', 'psykaDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		}
 		
-		bg = new FlxSprite().loadGraphic(Paths.image('titleMeni/leTitleBG'));
-		bg.setGraphicSize(Std.int(bg.width * 1.1));
-		bg.screenCenter();
-		
-		add(bg);
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
 		add(gfDance);
 		gfDance.shader = swagShader.shader;
@@ -256,12 +250,6 @@ class TitleState extends MusicBeatState
 
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		credGroup.add(blackScreen);
-		
-		bgScroll = new FlxBackdrop(Paths.image('titleMenu/titleSCROLL'), 0, 0, true, false); // change the titleSCROLL to any image you want to use
-		bgScroll.velocity.set(100, 0);
-		bgScroll.screenCenter();
-		bgScroll.setGraphicSize(Std.int(bgScroll.width * 1.1));
-		credGroup.add(bgScroll);
 
 		credTextShit = new Alphabet(0, 0, "", true);
 		credTextShit.screenCenter();
@@ -462,8 +450,6 @@ class TitleState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
-		FlxTween.tween(FlxG.camera, {zoom:1.03}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
-
 		if(logoBl != null) 
 			logoBl.animation.play('bump');
 
