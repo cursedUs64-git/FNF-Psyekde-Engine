@@ -51,7 +51,7 @@ class TitleState extends MusicBeatState
 
 	var wackyImage:FlxSprite;
 
-	var easterEggEnabled:Bool = true; //Disable this to hide the easter egg
+	var easterEggEnabled:Bool = false; //Disable this to hide the easter egg
 	var easterEggKeyCombination:Array<FlxKey> = [FlxKey.B, FlxKey.B]; //bb stands for bbpanzu cuz he wanted this lmao
 	var lastKeysPressed:Array<FlxKey> = [];
 
@@ -77,22 +77,22 @@ class TitleState extends MusicBeatState
 		
 		#if CHECK_FOR_UPDATES
 		if(!closedState) {
-			trace('checking for update');
-			var http = new haxe.Http("https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/main/gitVersion.txt");
+			trace('doing litreally NOTHING!');
+			var http = new haxe.Http("");
 			
 			http.onData = function (data:String)
 			{
 				updateVersion = data.split('\n')[0].trim();
 				var curVersion:String = MainMenuState.psychEngineVersion.trim();
-				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
+				trace('no');
 				if(updateVersion != curVersion) {
-					trace('versions arent matching!');
-					mustUpdate = true;
+					trace('no');
+					mustUpdate = false;
 				}
 			}
 			
 			http.onError = function (error) {
-				trace('error: $error');
+				trace('yes');
 			}
 			
 			http.request();
@@ -113,7 +113,7 @@ class TitleState extends MusicBeatState
 		swagShader = new ColorSwap();
 		super.create();
 
-		FlxG.save.bind('funkin', 'ninjamuffin99');
+		FlxG.save.bind('funkup', 'mufferniuff');
 		ClientPrefs.loadPrefs();
 
 		Highscore.load();
@@ -158,7 +158,7 @@ class TitleState extends MusicBeatState
 	{
 		if (!initialized)
 		{
-			/*var diamond:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileDiamond);
+			var diamond:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileDiamond);
 			diamond.persist = true;
 			diamond.destroyOnNoUse = false;
 
@@ -168,7 +168,7 @@ class TitleState extends MusicBeatState
 				{asset: diamond, width: 32, height: 32}, new FlxRect(-300, -300, FlxG.width * 1.8, FlxG.height * 1.8));
 				
 			transIn = FlxTransitionableState.defaultTransIn;
-			transOut = FlxTransitionableState.defaultTransOut;*/
+			transOut = FlxTransitionableState.defaultTransOut; // umm, NEEDED?
 
 			// HAD TO MODIFY SOME BACKEND SHIT
 			// IF THIS PR IS HERE IF ITS ACCEPTED UR GOOD TO GO
@@ -205,7 +205,7 @@ class TitleState extends MusicBeatState
 		// logoBl.color = FlxColor.BLACK;
 
 		swagShader = new ColorSwap();
-		gfDance.visible = false;
+		
 		if(!FlxG.save.data.psykaEasterEgg || !easterEggEnabled) {
 			gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
 			gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
@@ -223,6 +223,7 @@ class TitleState extends MusicBeatState
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
 		add(gfDance);
 		gfDance.shader = swagShader.shader;
+		gfDance.visible = false;
 		add(logoBl);
 		//logoBl.shader = swagShader.shader;
 
@@ -236,13 +237,13 @@ class TitleState extends MusicBeatState
 		// titleText.screenCenter(X);
 		add(titleText);
 
-		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image(''));
-		logo.screenCenter();
-		logo.antialiasing = ClientPrefs.globalAntialiasing;
-		// add(logo);
+// 		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image(''));
+// 		logo.screenCenter();
+// 		logo.antialiasing = ClientPrefs.globalAntialiasing;
+// 		// add(logo); // Are these even needed? (slash'ed cuz mabe chance of optimization)
 
-		FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
-		FlxTween.tween(logo, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
+// 		FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
+// 		FlxTween.tween(logo, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
 
 		credGroup = new FlxGroup();
 		add(credGroup);
@@ -306,15 +307,15 @@ class TitleState extends MusicBeatState
 
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER;
 
-		#if mobile
-		for (touch in FlxG.touches.list)
-		{
-			if (touch.justPressed)
-			{
-				pressedEnter = true;
-			}
-		}
-		#end
+// 		#if mobile
+// 		for (touch in FlxG.touches.list)
+// 		{
+// 			if (touch.justPressed)
+// 			{
+// 				pressedEnter = true;
+// 			}
+// 		}
+// 		#end // If your making a port of this engine in android, un-slash it.
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
@@ -511,8 +512,9 @@ class TitleState extends MusicBeatState
 				// credTextShit.text += '\nNight';
 				case 15:
 					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
-
 				case 16:
+					addMoreText("Psyek'de engine"); // credTextShit.text += '\nPsyek'de engine';
+				case 17:
 					skipIntro();
 			}
 		}
