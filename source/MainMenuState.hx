@@ -116,10 +116,11 @@ class MainMenuState extends MusicBeatState
 				{
 					menuItem.scale.set(1, 1);
 					menuItem.animation.play('selected');
-			}	}
+				}
+			}	
 		 	
-		
-			else{
+			else
+			{
 				var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 				var menuItem:MenuObject = new MenuObject(100, (i * 140)  + offset);
 				menuItem.scale.x = scale;
@@ -129,7 +130,7 @@ class MainMenuState extends MusicBeatState
 				menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 				menuItem.animation.play('idle');
 				menuItem.ID = i;
-				//menuItem.screenCenter(X);
+				menuItem.screenCenter(X);
 				menuItems.add(menuItem);
 				var scr:Float = (optionShit.length - 4) * 0.135;
 				if(optionShit.length < 6) scr = 0;
@@ -137,8 +138,9 @@ class MainMenuState extends MusicBeatState
 				menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 				//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 				menuItem.updateHitbox();
-		    	}
-
+		   }
+		}
+		
 		FlxG.camera.follow(camFollowPos, null, 1);
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Psyek'de Engine v" + "0.1.5", 12);
 		versionShit.scrollFactor.set();
@@ -153,7 +155,7 @@ class MainMenuState extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
-// 		NG.core.calls.event.logEvent('swag').send(); // is this even needed? (answer(s) in issues)
+        // NG.core.calls.event.logEvent('swag').send(); // is this even needed? (answer(s) in issues)
 
 		changeItem();
 
