@@ -138,7 +138,7 @@ class MainMenuState extends MusicBeatState
 				menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 				//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 				menuItem.updateHitbox();
-		   }
+		    }
 		}
 		
 		FlxG.camera.follow(camFollowPos, null, 1);
