@@ -90,11 +90,8 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			
-			var offset:Float = 10 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:MenuObject = new MenuObject(0, (i * 140)  + offset);
-			//menuItem.scale.x = scale;
-			//menuItem.scale.y = scale;
+			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
+			var menuItem:FlxSprite = new FlxSprite(0, (i * 140)  + offset);
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
@@ -104,45 +101,14 @@ class MainMenuState extends MusicBeatState
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
-			menuItem.scrollFactor.set(0, 0);
+			menuItem.scrollFactor.set(0, scr);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
-			if (i != 0)
-			{
-				menuItem.scale.set(0.7, 0.7);
-			}
-			else if(i == 0)
-			{
-				menuItem.scale.set(1, 1);
-				menuItem.animation.play('selected');
-			}
-		 	
-			else
-			{
-				
-				var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-				var menuItem:MenuObject = new MenuObject(100, (i * 140)  + offset);
-				menuItem.scale.x = scale;
-				menuItem.scale.y = scale;
-				menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
-				menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
-				menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
-				menuItem.animation.play('idle');
-				menuItem.ID = i;
-				menuItem.screenCenter(X);
-				menuItems.add(menuItem);
-				var scr:Float = (optionShit.length - 4) * 0.135;
-				if(optionShit.length < 6) scr = 0;
-				menuItem.scrollFactor.set(0, scr);
-				menuItem.antialiasing = ClientPrefs.globalAntialiasing;
-				//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
-				menuItem.updateHitbox();
-			}
 		}
 		
 		FlxG.camera.follow(camFollowPos, null, 1);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Psyek'de Engine v" + "0.1.5.2", 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Psyek'de Engine v" + "0.1.6-test", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
