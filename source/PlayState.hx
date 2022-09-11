@@ -103,6 +103,7 @@ class PlayState extends MusicBeatState
 	public var gfGroup:FlxSpriteGroup;
 	public static var mania:Int;
 	public static var curStage:String = '';
+	public static var curse:String = curStage;
 	public static var isPixelStage:Bool = false;
 	public static var SONG:SwagSong = null;
 	public static var isStoryMode:Bool = false;
@@ -289,24 +290,37 @@ class PlayState extends MusicBeatState
 		if(PlayState.SONG.stage == null || PlayState.SONG.stage.length < 1) {
 			switch (songName)
 			{
+				
+				case 'test':
+					curse = 'stage';
+					curStage = 'stage';
+				case 'tutorial':
+					curse = 'stage';
+					curStage = 'stage';
 				case 'spookeez' | 'south' | 'monster':
 					curStage = 'spooky';
+					curse = 'spooky';
 				case 'pico' | 'blammed' | 'philly' | 'philly-nice':
 					curStage = 'philly';
+					curse = 'philly';
 				case 'milf' | 'satin-panties' | 'high':
 					curStage = 'limo';
+					curse = 'limo';
 				case 'cocoa' | 'eggnog':
 					curStage = 'mall';
+					curse = 'mall';
 				case 'winter-horrorland':
 					curStage = 'mallEvil';
+					curse = 'mallEvil';
 				case 'senpai' | 'roses':
 					curStage = 'school';
+					curse = 'school';
 				case 'thorns':
 					curStage = 'schoolEvil';
-				case false:
-					curStage = bullshot + detailsText;
+					curse = 'schoolEvil';
 				default:
-					curStage = curStage;
+					curStage = 'stage';
+					curse = 'stage';
 				
 			}
 		}
@@ -337,7 +351,7 @@ class PlayState extends MusicBeatState
 		dadGroup = new FlxSpriteGroup(DAD_X, DAD_Y);
 		gfGroup = new FlxSpriteGroup(GF_X, GF_Y);
 
-		switch (curStage)
+		switch (curStage && curse)
 		{
 			case 'stage': //Week 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
@@ -677,7 +691,7 @@ class PlayState extends MusicBeatState
 			blammedLightsBlack.wasAdded = true;
 			modchartSprites.set('blammedLightsBlack', blammedLightsBlack);
 		}
-		if(curStage == 'philly') insert(members.indexOf(blammedLightsBlack) + 1, phillyCityLightsEvent);
+		if(curStage == 'philly' || curse == 'philly') insert(members.indexOf(blammedLightsBlack) + 1, phillyCityLightsEvent);
 		blammedLightsBlack = modchartSprites.get('blammedLightsBlack');
 		blammedLightsBlack.alpha = 0.0;
 		#end
@@ -777,7 +791,7 @@ class PlayState extends MusicBeatState
 			'songPercent', 0, 1);
 		timeBar.scrollFactor.set();
 		timeBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
-		timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
+		timeBar.numDivisions = 400; //How much lag this causes?? Should i tone it down to idk, 200?
 		timeBar.alpha = 0;
 		timeBar.visible = !ClientPrefs.hideTime;
 		add(timeBar);
@@ -1601,8 +1615,8 @@ class PlayState extends MusicBeatState
 					else if ((!shitNote.isSustainNote && (shitNote.strumTime - daNote.strumTime) < 15))
 						goodNoteHit(shitNote);
 
-					/*if (hittableNotes.length > 2 && SaveData.casual) //literally all you need to allow you to spam though impossiblely hard jacks
-						goodNoteHit(shitNote, playernum);*/
+					if (hittableNotes.length > 2 && SaveData.casual) //literally all you need to allow you to spam though impossiblely hard jacks
+						goodNoteHit(shitNote, playernum); // i allowed spam - cursedUs64-git.
 				}
 
 			}
