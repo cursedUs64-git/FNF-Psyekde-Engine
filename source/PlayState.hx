@@ -1615,9 +1615,11 @@ class PlayState extends MusicBeatState
 					else if ((!shitNote.isSustainNote && (shitNote.strumTime - daNote.strumTime) < 15))
 						goodNoteHit(shitNote);
 
- 					if (hittableNotes.length > 2 /*&& SaveData.casual*/) //literally all you need to allow you to spam though impossiblely hard jacks
-						goodNoteHit(shitNote, playernum); // i allowed spam - cursedUs64-git.
-				}
+					//if (hittableNotes.length)
+					//{
+						
+						//goodNoteHit(shitNote, playernum); // i allowed spam - cursedUs64-git.
+				}	//}
 
 			}
 			goodNoteHit(daNote);
@@ -4200,7 +4202,8 @@ class PlayState extends MusicBeatState
 				spr.moveKeyPositions(spr, newMania, strumnum);
 			});	
 
-			keysHeld = [false,false,false,false,false,false,false,false,false];
+			keysHeld = [true,true,true,true,true,true,true,true,true];
+// 			
 		}
 	}
 }
