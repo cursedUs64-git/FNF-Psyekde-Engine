@@ -292,35 +292,35 @@ class PlayState extends MusicBeatState
 			{
 				
 				case 'test':
-					curse = 'stage';
+					
 					curStage = 'stage';
 				case 'tutorial':
-					curse = 'stage';
+					
 					curStage = 'stage';
 				case 'spookeez' | 'south' | 'monster':
 					curStage = 'spooky';
-					curse = 'spooky';
+					
 				case 'pico' | 'blammed' | 'philly' | 'philly-nice':
 					curStage = 'philly';
-					curse = 'philly';
+					
 				case 'milf' | 'satin-panties' | 'high':
 					curStage = 'limo';
-					curse = 'limo';
+					
 				case 'cocoa' | 'eggnog':
 					curStage = 'mall';
-					curse = 'mall';
+					
 				case 'winter-horrorland':
 					curStage = 'mallEvil';
-					curse = 'mallEvil';
+					
 				case 'senpai' | 'roses':
 					curStage = 'school';
 					curse = 'school';
 				case 'thorns':
 					curStage = 'schoolEvil';
-					curse = 'schoolEvil';
+					
 				default:
 					curStage = 'stage';
-					curse = 'stage';
+					
 				
 			}
 		}
@@ -351,7 +351,7 @@ class PlayState extends MusicBeatState
 		dadGroup = new FlxSpriteGroup(DAD_X, DAD_Y);
 		gfGroup = new FlxSpriteGroup(GF_X, GF_Y);
 
-		switch (curStage && curse)
+		switch (curStage)
 		{
 			case 'stage': //Week 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
@@ -599,10 +599,10 @@ class PlayState extends MusicBeatState
 				GameOverSubstate.endSoundName = 'gameOverEnd-pixel';
 				GameOverSubstate.characterName = 'bf-pixel-dead';
 
-				/*if(!ClientPrefs.lowQuality) { //Does this even do something?
+				if(!ClientPrefs.lowQuality) { //Does this even do something? Ans: yes.
 					var waveEffectBG = new FlxWaveEffect(FlxWaveMode.ALL, 2, -1, 3, 2);
 					var waveEffectFG = new FlxWaveEffect(FlxWaveMode.ALL, 2, -1, 5, 2);
-				}*/
+				}
 
 				var posX = 400;
 				var posY = 200;
@@ -691,7 +691,7 @@ class PlayState extends MusicBeatState
 			blammedLightsBlack.wasAdded = true;
 			modchartSprites.set('blammedLightsBlack', blammedLightsBlack);
 		}
-		if(curStage == 'philly' || curse == 'philly') insert(members.indexOf(blammedLightsBlack) + 1, phillyCityLightsEvent);
+		if(curStage == 'philly') insert(members.indexOf(blammedLightsBlack) + 1, phillyCityLightsEvent);
 		blammedLightsBlack = modchartSprites.get('blammedLightsBlack');
 		blammedLightsBlack.alpha = 0.0;
 		#end
@@ -1615,7 +1615,7 @@ class PlayState extends MusicBeatState
 					else if ((!shitNote.isSustainNote && (shitNote.strumTime - daNote.strumTime) < 15))
 						goodNoteHit(shitNote);
 
-					if (hittableNotes.length > 2 && SaveData.casual) //literally all you need to allow you to spam though impossiblely hard jacks
+ 					if (hittableNotes.length > 2 /*&& SaveData.casual*/) //literally all you need to allow you to spam though impossiblely hard jacks
 						goodNoteHit(shitNote, playernum); // i allowed spam - cursedUs64-git.
 				}
 
